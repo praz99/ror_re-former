@@ -1,7 +1,6 @@
-<form accept-charset="UTF-8" action="/users" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  
-  <label for="username">Username</label>
+<%# <form accept-charset="UTF-8" action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>
+  <%# <label for="username">Username</label>
   <input type="text" id="username" name="user[username]"><br><br>
   
   <label for="email">Email</label>
@@ -11,4 +10,27 @@
   <input type="password" id="password" name="user[password]"><br><br>
   
   <input type="submit" value="Submit">
-</form>
+</form> %>
+
+<%
+=begin%>
+<%= form_tag("/users", method: "post") do %>
+  <%= label_tag(:username, "Username") %>
+  <%= text_field_tag(:username) %>
+  <%= label_tag(:email, "Email") %>
+  <%= email_field_tag(:email) %>
+  <%= label_tag(:password, "Password") %>
+  <%= password_field_tag(:password) %>
+<% end %>
+<%
+=end%>
+
+<%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.label :Username %>
+  <%= f.text_field :username, placeholder: "Enter a unique username."%>
+  <%= f.label :email %>
+  <%= f.email_field :email, placeholder: "your_email@example.com" %>
+  <%= f.label :password %>
+  <%= f.password_field :password, placeholder: "Enter a STRONG password."%>
+  <%= f.submit "Submit" %>
+<% end %>
