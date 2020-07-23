@@ -26,6 +26,12 @@
 =end%>
 
 <%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <ul>
+    <% @user.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+  
   <%= f.label :Username %>
   <%= f.text_field :username, placeholder: "Enter a unique username."%><br><br>
   <%= f.label :email %>
